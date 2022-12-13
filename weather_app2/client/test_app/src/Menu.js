@@ -1,6 +1,6 @@
 import { Menu, MenuItem, MenuButton, SubMenu } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
-const MenuComponent = () => {
+const MenuComponent = (props) => {
   const regions = [
     {
       region: "北海道地方",
@@ -69,7 +69,12 @@ const MenuComponent = () => {
       prefecture: ["沖縄本島地方", "大東島地方", "宮古島地方", "八重山地方"],
     },
   ];
-
+  let region = "";
+  const changeRegion = (data) => {
+    region = data;
+    console.log(region);
+    props.setValue(region);
+  };
   return (
     <div>
       <Menu menuButton={<MenuButton>地域を選択</MenuButton>}>
@@ -77,7 +82,9 @@ const MenuComponent = () => {
           return (
             <SubMenu label={data.region}>
               {data.prefecture.map((data) => {
-                return <MenuItem>{data}</MenuItem>;
+                return (
+                  <MenuItem onClick={() => changeRegion(data)}>{data}</MenuItem>
+                );
               })}
             </SubMenu>
           );

@@ -17,6 +17,6 @@ app.add_middleware(
 @app.get("/")
 def root():
     jma_json = urllib.request.urlopen("https://www.jma.go.jp/bosai/forecast/data/overview_forecast/130000.json")
-    endata = jma_json.read()
+    endata = jma_json.read().decode("utf-8")
     print(jma_json)
     return {"Hello": endata}
